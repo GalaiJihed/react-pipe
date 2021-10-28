@@ -15,7 +15,7 @@ const AddTaskForm = ({ addTask }) => {
         data-testid="input-box"
         type="text"
         value={value}
-        placeholder="Enter a title for this task…"
+        placeholder="Enter a title for this task…...."
         onChange={(e) => setValue(e.target.value)}
       />
       <button data-testid="submit-btn" type="submit">
