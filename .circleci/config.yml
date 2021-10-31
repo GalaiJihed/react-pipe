@@ -23,7 +23,9 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
-      - run: npm install
+      - node/install-packages:
+          override-ci-command: npm install
+          cache-path: ~/react-todo-list-app/node_modules 
 
       - save_cache:
           paths:
