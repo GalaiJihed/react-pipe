@@ -1,6 +1,7 @@
 version: 2.1
 orbs:
   node: circleci/node@3.0.0
+  codecov: codecov/codecov@3.0.0
 jobs:
   build:
     docker:
@@ -26,9 +27,10 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-      
       - codecov/upload:
-          file: './coverage/clover.xml'
-          token: f20ae384-7db5-417b-9942-fb44d1ef30c7
+          file: ./cover.xml 
+          
+
+
           
      
