@@ -26,7 +26,10 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-      
+      - run:
+          name: Upload CodeCov.io Data
+          command: bash <(curl -s https://codecov.io/bash) -F unittests
+          when: always # Uploads code coverage results, pass or fail
           
 
 
