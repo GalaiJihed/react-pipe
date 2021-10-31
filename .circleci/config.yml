@@ -22,7 +22,7 @@ jobs:
             - v1-dependencies-
 
       - run: npm install
-
+      
       - save_cache:
           paths:
             - node_modules
@@ -32,3 +32,6 @@ jobs:
       - run: npm run test
       - codecov/upload:
           file: './coverage/clover.xml'
+      - store_artifacts:
+          path: jekyll/_site/docs/
+          destination: circleci-docs
