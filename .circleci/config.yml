@@ -26,7 +26,7 @@ jobs:
           name: build-npm
           command: cd ~ && npm  build
 
-      - run: npm test:coverage
+      - run: cd ~ && npm test:coverage
 
       - save_cache:
           paths:
