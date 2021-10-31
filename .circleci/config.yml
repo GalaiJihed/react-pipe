@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - checkout
-
+      - codecov/upload
       # Download and cache dependencies
       - restore_cache:
           keys:
@@ -27,8 +27,7 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-      - codecov/upload:
-          file: ./cover.xml 
+      
           
 
 
