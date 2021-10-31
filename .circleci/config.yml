@@ -24,7 +24,7 @@ jobs:
 
       - run:
           name: build-npm
-          command: cd ~  npm run build
+          command: cd ~  npm  build
 
       - run: npm run test:coverage
 
