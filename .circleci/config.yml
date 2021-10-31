@@ -2,6 +2,7 @@ version: 2.1
 orbs:
   node: circleci/node@3.0.0
 jobs:
+  
   build:
     docker:
       - image: node:11.10.1
@@ -18,7 +19,9 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
       
-      - run: npm install
+      - run:
+          name: install-npm
+          command: cd ~/react-todo-list-app && pwd && npm install
 
       - save_cache:
           paths:
