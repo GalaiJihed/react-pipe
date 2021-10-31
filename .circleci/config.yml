@@ -26,9 +26,11 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-      - run:
-          name: test
-          command: yarn test
+      - run: npm run test
+
+      - run: npm run build
+
+      - run: npm run test:coverage
       - run:
           name: Generate code coverage
           command: './node_modules/.bin/nyc report --reporter=text-lcov'
