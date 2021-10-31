@@ -27,10 +27,18 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
       - run:
-          name: Upload CodeCov.io Data
-          command: bash <(curl -s https://codecov.io/bash) -F unittests
-          when: always # Uploads code coverage results, pass or fail
-          
+          name: Test
+          command: npm test
+      - run:
+          name: Generate code coverage
+          command: './node_modules/.bin/nyc report --reporter=text-lcov'
+      # You can specify either a single file or a directory to store as artifacts
+      - store_artifacts:
+          path: test-results.xml
+          destination: deliverable.xml
+      - store_artifacts:
+          path: coverage
+          destination: coverage   
 
 
           
