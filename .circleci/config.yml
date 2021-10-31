@@ -1,12 +1,12 @@
 version: 2.1
 orbs:
   node: circleci/node@3.0.0
-  codecov: codecov/codecov@3.0.0
+  codecov: codecov/codecov@3.2.0
 jobs:
   build:
     docker:
-      - image: node:11.10.1
-    
+      # replace with your preferred image
+      - image: cimg/base:stable
     working_directory: ~/repo
 
     steps:
@@ -30,8 +30,4 @@ jobs:
 
       # run tests!
       - run: npm run test
-      - codecov/upload:
-          file: './coverage/clover.xml'
-      - store_artifacts:
-          path: jekyll/_site/docs/
-          destination: circleci-docs
+  
