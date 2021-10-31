@@ -1,19 +1,17 @@
 version: 2.1
 orbs:
   node: circleci/node@3.0.0
-  codecov: codecov/codecov@3.0.0
+  codecov: codecov/codecov@1.0.2
 jobs:
   build:
     docker:
       - image: node:11.10.1
-    
+
     working_directory: ~/repo
 
     steps:
       - checkout
-      - codecov/upload:
-          file: ./coverage/clover.xml 
-          token: f20ae384-7db5-417b-9942-fb44d1ef30c7 
+
       # Download and cache dependencies
       - restore_cache:
           keys:
@@ -22,7 +20,7 @@ jobs:
             - v1-dependencies-
 
       - run: npm install
-      
+
       - save_cache:
           paths:
             - node_modules
@@ -30,8 +28,10 @@ jobs:
 
       # run tests!
       - run: npm run test
+
+      - run: npm run build
+
+      - run: npm run test:coverage
+
       - codecov/upload:
           file: './coverage/clover.xml'
-      - store_artifacts:
-          path: jekyll/_site/docs/
-          destination: circleci-docs
