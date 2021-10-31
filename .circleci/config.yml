@@ -1,4 +1,7 @@
 version: 2.1
+orbs:
+  node: circleci/node@3.0.0
+ 
 jobs:
   build:
     docker:
@@ -8,7 +11,6 @@ jobs:
 
     steps:
       - checkout
-
       # Download and cache dependencies
       - restore_cache:
           keys:
@@ -24,10 +26,20 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-      
-      - codecov/upload:
-          file: './coverage/clover.xml'
-          token: f20ae384-7db5-417b-9942-fb44d1ef30c7
-orbs:
-  codecov: codecov/codecov@1.0.2
-  node: circleci/node@4.7.0
+      - run:
+          name: npm run test
+          command: cd ~ && npm run test
+      - run:
+          name: Generate code coverage
+          command: './node_modules/.bin/nyc report --reporter=text-lcov'
+      # You can specify either a single file or a directory to store as artifacts
+      - store_artifacts:
+          path: test-results.xml
+          destination: deliverable.xml
+      - store_artifacts:
+          path: coverage
+          destination: coverage   
+
+
+          
+     
