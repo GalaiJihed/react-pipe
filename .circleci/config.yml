@@ -23,11 +23,11 @@ jobs:
           command: cd ~ && pwd && npm install
 
       - run:
-          name: build
-          command: cd react-todo-list-app npm run build
+          name: build-npm
+          command: cd ~  npm run build
 
       - run: npm run test:coverage
-      
+
       - save_cache:
           paths:
             - node_modules
