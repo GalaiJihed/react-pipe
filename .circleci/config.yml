@@ -33,13 +33,4 @@ jobs:
       
       
       # You can specify either a single file or a directory to store as artifacts
-      - store_artifacts:
-          path: test-results.xml
-          destination: deliverable.xml
-      - store_artifacts:
-          path: coverage
-          destination: coverage   
-
-
-          
-     
+    
