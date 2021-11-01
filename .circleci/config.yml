@@ -9,8 +9,7 @@ jobs:
 
     steps:
       - checkout
-      - codecov/upload:
-          file: ./codecov.yml
+     
       # Download and cache dependencies
       - restore_cache:
           keys:
@@ -31,7 +30,8 @@ jobs:
       - run: npm run build
 
       - run: npm run test:coverage
-      
+      - codecov/upload:
+          file: './coverage/clover.xml' 
       - run:
           name: Creating Dummy Artifacts
           command: |
