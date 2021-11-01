@@ -6,9 +6,6 @@ jobs:
   build:
     docker:
       - image: node:11.10.1
-
-    
-
     steps:
       - checkout
       # Download and cache dependencies
@@ -22,16 +19,20 @@ jobs:
           name: install-npm
           command: cd ~ && pwd && npm install
 
+      - run:
+          name: build-npm
+          command: cd ~ && npm  build
+
+      - run: 
+          name: test-npm
+          command: cd ~ && pwd npm run test:coverage
+
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-      - run:
-          name: npm run test
-          command: cd ~ && npm run test
-      - run:
-          name: Generate code coverage
-          command: './node_modules/.bin/nyc report --reporter=text-lcov'
+      
+      
       # You can specify either a single file or a directory to store as artifacts
       - store_artifacts:
           path: test-results.xml
