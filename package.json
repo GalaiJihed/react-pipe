@@ -20,6 +20,7 @@
     "eject": "react-scripts eject",
     "test:coverage": "cross-env CI=true npm test -- --env=jsdom --coverage",
     "upload:test-report": "./node_modules/.bin/codecov",
+    "report-coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
     "netlify:deploy": "netlify deploy --dir=./build -p -m \"$(git log -1 --pretty=%B)\""
   },
   "eslintConfig": {
