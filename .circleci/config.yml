@@ -9,7 +9,7 @@ jobs:
 
     steps:
       - checkout
-      
+     
       # Download and cache dependencies
       - restore_cache:
           keys:
@@ -30,7 +30,8 @@ jobs:
       - run: npm run build
 
       - run: npm run test:coverage
-      
+      - codecov/upload:
+          file: './codecov.xml' 
       - run:
           name: Creating Dummy Artifacts
           command: |
