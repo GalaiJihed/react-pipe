@@ -2,8 +2,19 @@ version: 2.1
 orbs:
   node: circleci/node@3.0.0
   codecov: codecov/codecov@3.1.1
-
-
+examples:
+    basic_upload:
+        description: |
+            Upload coverage with Codecov Create a simple flow to upload coverage reports to Codecov
+        usage:
+            version: "2.1"
+            orbs:
+                codecov: codecov/codecov@3.1.1
+            workflows:
+                upload-to-codecov:
+                    jobs:
+                        - checkout
+                        - codecov/upload
       
 jobs:
   
@@ -13,7 +24,7 @@ jobs:
 
     steps:
       - checkout
-      - codecov/upload
+      
      
       # Download and cache dependencies
       - restore_cache:
