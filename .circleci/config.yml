@@ -1,7 +1,7 @@
-version: 2.1
+version: 2
 orbs:
   node: circleci/node@3.0.0
-
+  codecov: codecov/codecov@1.0.2
 jobs:
   build:
     docker:
@@ -9,7 +9,8 @@ jobs:
 
     steps:
       - checkout
-      
+      - codecov/upload:
+          file: ./codecov.yml
       # Download and cache dependencies
       - restore_cache:
           keys:
