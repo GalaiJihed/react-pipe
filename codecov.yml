@@ -2,4 +2,5 @@ comment:                  # this is a top-level key
   layout: "reach, diff, flags, files"
   behavior: default
   require_changes: false  # if true: only post the comment if coverage changes
-  
+codecov:
+  token: f20ae384-7db5-417b-9942-fb44d1ef30c7
