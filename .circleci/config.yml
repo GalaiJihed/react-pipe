@@ -1,0 +1,36 @@
+version: 2.1
+orbs:
+  node: circleci/node@3.0.0
+jobs:
+  build:
+    docker:
+      - image: node:11.10.1
+    steps:
+      - checkout
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+      - run: curl -s https://codecov.io/bash | bash
+      - run:
+          name: install-npm
+          command: cd ~ && pwd && npm install
+
+      - run:
+          name: build-npm
+          command: cd ~ && npm  build
+
+      - run: 
+          name: test-npm
+          command: cd ~ && pwd npm run test:coverage
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+      
+      
+      # You can specify either a single file or a directory to store as artifacts
+    
