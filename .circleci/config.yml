@@ -1,10 +1,7 @@
 version: 2.1
 orbs:
-  
-  node: circleci/node@4.4.0
-  orb-tools: circleci/orb-tools@10.0
-  win: circleci/windows@2.2.0
-  codecov: codecov/codecov@3.0.0
+  node: circleci/node@3.0.0
+
 jobs:
   build:
     docker:
@@ -33,13 +30,8 @@ jobs:
       - run: npm run build
 
       - run: npm run test:coverage
-     
       - codecov/upload:
-          file: coverage/coverage-final.json
-          flags: frontend,alpine
-          xtra_args: -v -Z
-  
-
+          file: './codecov.xml' 
       - run:
           name: Creating Dummy Artifacts
           command: |
