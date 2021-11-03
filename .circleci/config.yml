@@ -1,7 +1,7 @@
 version: 2.1
 orbs:
   node: circleci/node@3.0.0
-  sonarcloud: sonarsource/sonarcloud@1.0.0
+  sonarcloud: sonarsource/sonarcloud@1.0.2
 jobs:
   build:
     docker:
@@ -9,7 +9,9 @@ jobs:
 
     steps:
       - checkout
-      - sonarcloud/scan
+      - sonarcloud/scan:
+          cache_version: 1 
+          sonar_token_variable_name: Token
       # Download and cache dependencies
       - restore_cache:
           keys:
@@ -30,8 +32,7 @@ jobs:
       - run: npm run build
 
       - run: npm run test:coverage
-      - codecov/upload:
-          file: './codecov.xml' 
+     
       - run:
           name: Creating Dummy Artifacts
           command: |
