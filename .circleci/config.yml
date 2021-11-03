@@ -1,7 +1,7 @@
 version: 2.1
 orbs:
   node: circleci/node@3.0.0
-
+  sonarcloud: sonarsource/sonarcloud@1.0.0
 jobs:
   build:
     docker:
@@ -9,7 +9,7 @@ jobs:
 
     steps:
       - checkout
-     
+      - sonarcloud/scan
       # Download and cache dependencies
       - restore_cache:
           keys:
